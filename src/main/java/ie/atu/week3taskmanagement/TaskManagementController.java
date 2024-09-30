@@ -1,5 +1,6 @@
 package ie.atu.week3taskmanagement;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,18 +23,18 @@ public class TaskManagementController {
     }
 
     @PostMapping("/add")
-    public Task addTask(@RequestBody Task task) {
+    public Task addTask(@Valid @RequestBody Task task) {
         service.addTask(task);
         return task;
     }
 
     @DeleteMapping("/remove/{id}")
-    public void removeTask(@PathVariable int id) {
+    public void removeTask(@Valid @PathVariable int id) {
         service.removeTask(id);
     }
 
     @PutMapping("/update/{id}")
-    public Task updateTask(@PathVariable int id, @RequestBody Task task) {
+    public Task updateTask(@Valid @PathVariable int id, @Valid @RequestBody Task task) {
         service.updateTask(task, id);
         return task;
     }
