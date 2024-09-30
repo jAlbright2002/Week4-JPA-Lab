@@ -1,5 +1,6 @@
 package ie.atu.week3taskmanagement;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -8,6 +9,13 @@ import java.util.List;
 @Service
 public class TaskManagementService {
 
+    private final FeignClient client;
+
+    @Autowired
+    public TaskManagementService(FeignClient client) {
+        this.client = client;
+    }
+
     private List<Task> taskList = new ArrayList<>();
 
     public List<Task> getTasks() {
@@ -15,6 +23,7 @@ public class TaskManagementService {
     }
 
     public void addTask(Task task) {
+        client.test();
         taskList.add(task);
     }
 
