@@ -1,5 +1,6 @@
 package ie.atu.week3taskmanagement;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -8,22 +9,33 @@ import java.util.List;
 @RequestMapping("/task")
 public class TaskManagementController {
 
-    @GetMapping
+    private final TaskManagementService service;
+
+    @Autowired
+    public TaskManagementController(TaskManagementService service) {
+        this.service = service;
+    }
+
+    @GetMapping("/all")
     public List<Task> getTasks() {
-        return "";
+        return service.getTasks();
     }
 
-    @PostMapping
-    public Task addTask() {
-        return "";
+    @PostMapping("/add")
+    public Task addTask(@RequestBody Task task) {
+        service.addTask(task);
+        return task;
     }
 
-    @DeleteMapping
-    public void removeTask() { }
+    @DeleteMapping("/remove/{id}")
+    public void removeTask(@PathVariable int id) {
+        service.removeTask(id);
+    }
 
-    @PutMapping
-    public Task updateTask() {
-        return "";
+    @PutMapping("/update/{id}")
+    public Task updateTask(@PathVariable int id, @RequestBody Task task) {
+        service.updateTask(task, id);
+        return task;
     }
 
 }
