@@ -2,26 +2,27 @@ package ie.atu.week3taskmanagement;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/task")
 public class TaskManagementController {
 
     @GetMapping
-    public String getTasks() {
+    public List<Task> getTasks() {
         return "";
     }
 
     @PostMapping
-    public String addTask() {
+    public Task addTask() {
         return "";
     }
 
     @DeleteMapping
-    public String removeTask() {
-        return "";
-    }
+    public void removeTask() { }
 
     @PutMapping
-    public String updateTask() {
+    public Task updateTask() {
         return "";
     }
 
