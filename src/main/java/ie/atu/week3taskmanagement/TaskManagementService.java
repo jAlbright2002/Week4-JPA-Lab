@@ -18,13 +18,16 @@ public class TaskManagementService {
 
     private List<Task> taskList = new ArrayList<>();
 
+    String notification;
+
     public List<Task> getTasks() {
         return taskList;
     }
 
     public void addTask(Task task) {
-        client.test();
         taskList.add(task);
+        notification = client.addedTask();
+        System.out.println(notification);
     }
 
     public void updateTask(Task task, int id) {
@@ -34,10 +37,14 @@ public class TaskManagementService {
                 task1.setStatus(task.getStatus());
             }
         }
+        notification = client.updatedTask();
+        System.out.println(notification);
     }
 
     public void removeTask(int id) {
         taskList.removeIf(task -> task.getId() == id);
+        notification = client.removedTask();
+        System.out.println(notification);
     }
 
 }
