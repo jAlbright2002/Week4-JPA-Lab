@@ -11,8 +11,11 @@ public class TaskManagementService {
 
     private final FeignClient client;
 
+    private TaskRepository taskRepo;
+
     @Autowired
-    public TaskManagementService(FeignClient client) {
+    public TaskManagementService(FeignClient client, TaskRepository taskRepo) {
+        this.taskRepo = taskRepo;
         this.client = client;
     }
 
@@ -21,13 +24,13 @@ public class TaskManagementService {
     String notification;
 
     public List<Task> getTasks() {
-        return taskList;
+        return taskRepo.findAll();
     }
 
     public void addTask(Task task) {
-        taskList.add(task);
-        notification = client.addedTask();
-        System.out.println(notification);
+        taskRepo.save(task);
+//        notification = client.addedTask();
+//        System.out.println(notification);
     }
 
     public void updateTask(Task task, int id) {
