@@ -29,13 +29,13 @@ public class TaskManagementController {
     }
 
     @DeleteMapping("/remove/{id}")
-    public void removeTask(@Valid @PathVariable int id) {
+    public void removeTask(@Valid @PathVariable Long id) {
         service.removeTask(id);
     }
 
     @PutMapping("/update/{id}")
-    public Task updateTask(@Valid @PathVariable int id, @Valid @RequestBody Task task) {
-        service.updateTask(task, id);
+    public Task updateTask(@Valid @PathVariable Long id, @Valid @RequestBody Task task) {
+        service.updateTask(id, task);
         return task;
     }
 
